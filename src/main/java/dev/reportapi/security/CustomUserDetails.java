@@ -26,24 +26,18 @@
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            /*return user.getRoles().stream()
-                    .flatMap(role -> {
-                        // Add role itself
-                        Stream<GrantedAuthority> roleStream = Stream.of(new SimpleGrantedAuthority("ROLE_" + role.getName()));
-                        // Add associated authorities
-                        Stream<GrantedAuthority> authorityStream = role.getAuthorities().stream()
-                                .map(authority -> new SimpleGrantedAuthority(authority.getName()));
-                        return Stream.concat(roleStream, authorityStream);
-                    })
-                    .collect(Collectors.toList());*/
-
             List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-            user.getRoles().forEach(role -> {
-                authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
-                role.getAuthorities().forEach(authority -> {
-                    authorities.add(new SimpleGrantedAuthority(authority.getName()));
-                });
-            });
+
+            if (user.getRole() != null) {
+                // Add the role
+                authorities.add(new SimpleGrantedAuthority(user.getRole().getAuthority()));
+
+                // Add the authorities of that role
+                user.getRole().getAuthorities().forEach(authority ->
+                        authorities.add(new SimpleGrantedAuthority(authority.getName()))
+                );
+            }
+
             return authorities;
         }
 

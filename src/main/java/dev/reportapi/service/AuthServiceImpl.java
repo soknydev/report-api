@@ -1,6 +1,5 @@
 package dev.reportapi.service;
 
-
 import dev.reportapi.dto.AuthResponse;
 import dev.reportapi.dto.LoginRequest;
 import dev.reportapi.dto.RefreshTokenRequest;
@@ -65,7 +64,7 @@ public class AuthServiceImpl implements AuthService {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
-        user.setRoles(List.of(role));
+        user.setRole(role);
 
         // Save the user
         userRepository.save(user);

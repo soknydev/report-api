@@ -27,8 +27,9 @@ public class User {
 
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Role> roles;
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false) // Ensure this is set
+    private Role role;
 
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;

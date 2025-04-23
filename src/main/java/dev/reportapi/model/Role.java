@@ -30,9 +30,8 @@ public class Role implements GrantedAuthority {
     )
     private List<Authority> authorities;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false) // Ensure this is set
-    private User user;
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+    private List<User> users;
 
     @Override
     public String getAuthority() {

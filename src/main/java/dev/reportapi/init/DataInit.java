@@ -30,80 +30,59 @@ public class DataInit {
 
     private void initAuthoritiesAndRoles() {
         if (authorityRepository.count() == 0) {
-            // Initialize authorities
-            Authority userRead = new Authority();
-            userRead.setName("user:read");
+            // Create authorities
+            Authority userRead = new Authority(); userRead.setName("user:read");
+            Authority userWrite = new Authority(); userWrite.setName("user:write");
+            Authority customerRead = new Authority(); customerRead.setName("customer:read");
+            Authority customerWrite = new Authority(); customerWrite.setName("customer:write");
+            Authority reportRead = new Authority(); reportRead.setName("report:read");
+            Authority reportWrite = new Authority(); reportWrite.setName("report:write");
 
-            Authority userWrite = new Authority();
-            userWrite.setName("user:write");
-
-            Authority customerRead = new Authority();
-            customerRead.setName("customer:read");
-
-            Authority customerWrite = new Authority();
-            customerWrite.setName("customer:write");
-
-            Authority reportRead = new Authority();
-            reportRead.setName("report:read");
-
-            Authority reportWrite = new Authority();
-            reportWrite.setName("report:write");
-
-            authorityRepository.saveAll(List.of(userRead, userWrite, customerRead, customerWrite, reportRead, reportWrite));
+            authorityRepository.saveAll(List.of(
+                    userRead, userWrite,
+                    customerRead, customerWrite,
+                    reportRead, reportWrite
+            ));
 
             if (roleRepository.count() == 0 && userRepository.count() == 0) {
-
-                // Create user role:user
-                User user = new User();
-                user.setUuid("123e4567-e89b-12d3-a456-426614174000");
-                user.setName("User");
-                user.setUsername("user");
-                user.setPassword(passwordEncoder.encode("user123"));
-                //user.setPassword("pas123");
-                user.setAccountNonExpired(true);
-                user.setAccountNonLocked(true);
-                user.setCredentialsNonExpired(true);
-                user.setEnabled(true);
-                //user.setDeleted(false);
-                //user.setBlocked(false);
-                userRepository.save(user);
-
-                // Create user role:admin
-                User userAdmin = new User();
-                userAdmin.setUuid("123e4567-e89b-12d3-a456-426614172030");
-                userAdmin.setName("Admin");
-                userAdmin.setUsername("admin");
-                userAdmin.setPassword(passwordEncoder.encode("admin123"));
-                //userAdmin.setPassword("pas123");
-                userAdmin.setAccountNonExpired(true);
-                userAdmin.setAccountNonLocked(true);
-                userAdmin.setCredentialsNonExpired(true);
-                userAdmin.setEnabled(true);
-                //userAdmin.setDeleted(false);
-                //userAdmin.setBlocked(false);
-                userRepository.save(userAdmin);
 
                 // Create roles and associate authorities
                 Role userRole = new Role();
                 userRole.setName("USER");
                 userRole.setAuthorities(List.of(userRead, customerRead, customerWrite, reportRead));
-                userRole.setUser(user);
 
                 Role adminRole = new Role();
                 adminRole.setName("ADMIN");
                 adminRole.setAuthorities(List.of(userRead, userWrite, customerRead, customerWrite, reportRead, reportWrite));
-                adminRole.setUser(userAdmin);
 
-                // Save roles
                 roleRepository.saveAll(List.of(userRole, adminRole));
 
-                // Assign roles to the user
-                user.setRoles(List.of(userRole));
-                userAdmin.setRoles(List.of(adminRole));
+                // Create user with role USER
+                User user = new User();
+                user.setUuid("123e4567-e89b-12d3-a456-426614174000");
+                user.setName("User");
+                user.setUsername("user");
+                user.setPassword(passwordEncoder.encode("user123"));
+                user.setAccountNonExpired(true);
+                user.setAccountNonLocked(true);
+                user.setCredentialsNonExpired(true);
+                user.setEnabled(true);
+                user.setRole(userRole);
+
+                // Create admin with role ADMIN
+                User userAdmin = new User();
+                userAdmin.setUuid("123e4567-e89b-12d3-a456-426614172030");
+                userAdmin.setName("Admin");
+                userAdmin.setUsername("admin");
+                userAdmin.setPassword(passwordEncoder.encode("admin123"));
+                userAdmin.setAccountNonExpired(true);
+                userAdmin.setAccountNonLocked(true);
+                userAdmin.setCredentialsNonExpired(true);
+                userAdmin.setEnabled(true);
+                userAdmin.setRole(adminRole);
+
                 userRepository.saveAll(List.of(user, userAdmin));
             }
         }
     }
-
-
 }

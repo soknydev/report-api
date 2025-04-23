@@ -70,6 +70,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/customers/**").hasAuthority("SCOPE_customer:write")
                         .requestMatchers(HttpMethod.DELETE, "/api/customers/**").hasAuthority("SCOPE_customer:delete")
 
+                        .requestMatchers(HttpMethod.GET, "/api/reports/**").hasAuthority("SCOPE_report:read")
+
                         .requestMatchers(HttpMethod.GET, "/api/v1/users/**").hasAuthority("SCOPE_user:read")
                         .requestMatchers(HttpMethod.POST, "/api/v1/users/**").hasAuthority("SCOPE_user:write")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/users/**").hasAuthority("SCOPE_user:write")
