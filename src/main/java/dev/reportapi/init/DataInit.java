@@ -21,7 +21,7 @@ public class DataInit {
     private final AuthorityRepository authorityRepository;
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @PostConstruct
     void init() {
@@ -58,8 +58,8 @@ public class DataInit {
                 user.setUuid("123e4567-e89b-12d3-a456-426614174000");
                 user.setName("User");
                 user.setUsername("user");
-                //user.setPassword(passwordEncoder.encode("user123"));
-                user.setPassword("pas123");
+                user.setPassword(passwordEncoder.encode("user123"));
+                //user.setPassword("pas123");
                 user.setAccountNonExpired(true);
                 user.setAccountNonLocked(true);
                 user.setCredentialsNonExpired(true);
@@ -73,8 +73,8 @@ public class DataInit {
                 userAdmin.setUuid("123e4567-e89b-12d3-a456-426614172030");
                 userAdmin.setName("Admin");
                 userAdmin.setUsername("admin");
-                //userAdmin.setPassword(passwordEncoder.encode("admin123"));
-                userAdmin.setPassword("pas123");
+                userAdmin.setPassword(passwordEncoder.encode("admin123"));
+                //userAdmin.setPassword("pas123");
                 userAdmin.setAccountNonExpired(true);
                 userAdmin.setAccountNonLocked(true);
                 userAdmin.setCredentialsNonExpired(true);
@@ -92,14 +92,14 @@ public class DataInit {
                 Role adminRole = new Role();
                 adminRole.setName("ADMIN");
                 adminRole.setAuthorities(List.of(userRead, userWrite, customerRead, customerWrite, reportRead, reportWrite));
-                adminRole.setUser(user);
+                adminRole.setUser(userAdmin);
 
                 // Save roles
                 roleRepository.saveAll(List.of(userRole, adminRole));
 
                 // Assign roles to the user
                 user.setRoles(List.of(userRole));
-                userAdmin.setRoles(List.of(userRole, adminRole));
+                userAdmin.setRoles(List.of(adminRole));
                 userRepository.saveAll(List.of(user, userAdmin));
             }
         }

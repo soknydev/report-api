@@ -64,7 +64,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(
                 request -> request
-                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/customers/**").hasAuthority("SCOPE_customer:read")
                         .requestMatchers(HttpMethod.POST, "/api/customers/**").hasAuthority("SCOPE_customer:write")
                         .requestMatchers(HttpMethod.PUT, "/api/customers/**").hasAuthority("SCOPE_customer:write")
