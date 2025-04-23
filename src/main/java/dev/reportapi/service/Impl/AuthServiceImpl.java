@@ -1,4 +1,4 @@
-package dev.reportapi.service;
+package dev.reportapi.service.Impl;
 
 import dev.reportapi.dto.AuthResponse;
 import dev.reportapi.dto.LoginRequest;
@@ -8,9 +8,10 @@ import dev.reportapi.model.Role;
 import dev.reportapi.model.User;
 import dev.reportapi.repository.RoleRepository;
 import dev.reportapi.repository.UserRepository;
+import dev.reportapi.service.AuthService;
+import dev.reportapi.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -21,7 +22,6 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service

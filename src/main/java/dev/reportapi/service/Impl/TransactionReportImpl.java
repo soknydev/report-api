@@ -1,6 +1,7 @@
-package dev.reportapi.service;
+package dev.reportapi.service.Impl;
 
 import dev.reportapi.model.TransactionReport;
+import dev.reportapi.service.TransactionReportService;
 import lombok.RequiredArgsConstructor;
 import oracle.jdbc.OracleTypes;
 import org.springframework.jdbc.core.JdbcTemplate;
