@@ -1,0 +1,37 @@
+package dev.reportapi.security;
+
+
+import dev.reportapi.model.User;
+import dev.reportapi.repository.UserRepository;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Setter
+@Getter
+@RequiredArgsConstructor
+@Slf4j
+@Service
+@ToString
+public class UserDetailsServiceImpl implements UserDetailsService {
+
+    private final UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // load user from database
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User has not been found...!"));
+
+        CustomUserDetails customUserDetails = new CustomUserDetails();
+        customUserDetails.setUser(user);
+        log.info("user {}", user);
+        log.info(user.getUsername());
+        log.info(user.getPassword());
+        return customUserDetails;
+    }
+
+}

@@ -24,6 +24,9 @@ repositories {
 }
 
 dependencies {
+
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+
     implementation 'com.oracle.database.jdbc:ojdbc11:23.3.0.23.09'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation("org.springframework.boot:spring-boot-starter-security")

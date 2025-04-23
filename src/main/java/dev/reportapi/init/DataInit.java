@@ -37,13 +37,19 @@ public class DataInit {
             Authority userWrite = new Authority();
             userWrite.setName("user:write");
 
-            Authority productRead = new Authority();
-            productRead.setName("product:read");
+            Authority customerRead = new Authority();
+            customerRead.setName("customer:read");
 
-            Authority productWrite = new Authority();
-            productWrite.setName("product:write");
+            Authority customerWrite = new Authority();
+            customerWrite.setName("customer:write");
 
-            authorityRepository.saveAll(List.of(userRead, userWrite, productRead, productWrite));
+            Authority reportRead = new Authority();
+            reportRead.setName("report:read");
+
+            Authority reportWrite = new Authority();
+            reportWrite.setName("report:write");
+
+            authorityRepository.saveAll(List.of(userRead, userWrite, customerRead, customerWrite, reportRead, reportWrite));
 
             if (roleRepository.count() == 0 && userRepository.count() == 0) {
 
@@ -80,12 +86,12 @@ public class DataInit {
                 // Create roles and associate authorities
                 Role userRole = new Role();
                 userRole.setName("USER");
-                userRole.setAuthorities(List.of(userRead, productRead));
+                userRole.setAuthorities(List.of(userRead, customerRead, customerWrite, reportRead));
                 userRole.setUser(user);
 
                 Role adminRole = new Role();
                 adminRole.setName("ADMIN");
-                adminRole.setAuthorities(List.of(userRead, userWrite, productRead, productWrite));
+                adminRole.setAuthorities(List.of(userRead, userWrite, customerRead, customerWrite, reportRead, reportWrite));
                 adminRole.setUser(user);
 
                 // Save roles
