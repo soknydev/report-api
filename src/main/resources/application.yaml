@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: report_api
+
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1521/ORCL
+    username: ora1
+    password: ora1
+    driver-class-name: oracle.jdbc.OracleDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8080
+  error:
+    include-stacktrace: never
