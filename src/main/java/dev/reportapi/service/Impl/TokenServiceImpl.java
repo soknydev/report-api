@@ -56,7 +56,7 @@ public class TokenServiceImpl implements TokenService {
                 .subject("Access Resource")
                 .audience(List.of("Web", "Mobile"))
                 .issuedAt(now)
-                .expiresAt(now.plus(5, ChronoUnit.MINUTES))
+                .expiresAt(now.plus(1, ChronoUnit.HOURS))
                 .issuer(auth.getName())
                 .claim("scope", scope)
                 .build();
@@ -77,7 +77,7 @@ public class TokenServiceImpl implements TokenService {
                 .subject("Refresh Resource")
                 .audience(List.of("Web", "Mobile"))
                 .issuedAt(now)
-                .expiresAt(now.plus(5, ChronoUnit.MINUTES))
+                .expiresAt(now.plus(1, ChronoUnit.HOURS))
                 .issuer(auth.getName())
                 .claim("scope", scope)
                 .build();

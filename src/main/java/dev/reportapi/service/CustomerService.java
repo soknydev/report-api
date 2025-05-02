@@ -13,4 +13,6 @@ public interface CustomerService {
 
     List<CustomerV1> getCustomersByAccountType(String accountType );
 
+
+
 }

@@ -51,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
         log.info(accountType);
         return jdbcTemplate.execute((Connection connection) -> {
             List<CustomerV1> customers = new ArrayList<>();
-            try (CallableStatement cs = connection.prepareCall("{CALL ORA1.GET_CUSTOMERS_WITH_OPTIONS(?, ?)}")) {
+            try (CallableStatement cs = connection.prepareCall("{CALL ORA1.GET_CUSTOMERS_BY_ACCOUNT_TYPES(?, ?)}")) {
                 cs.setString(1, accountType); // e.g., "S,C,D"
                 cs.registerOutParameter(2, OracleTypes.CURSOR);
                 cs.execute();
@@ -77,5 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
             return customers;
         });
     }
+
+
 
 }
