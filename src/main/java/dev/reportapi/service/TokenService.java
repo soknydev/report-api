@@ -1,7 +1,7 @@
 package dev.reportapi.service;
 
 
-import dev.reportapi.dto.AuthResponse;
+import dev.reportapi.dto.auth.AuthResponse;
 import org.springframework.security.core.Authentication;
 
 public interface TokenService {

@@ -1,6 +1,6 @@
 package dev.reportapi.service.Impl;
 
-import dev.reportapi.dto.AuthResponse;
+import dev.reportapi.dto.auth.AuthResponse;
 import dev.reportapi.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

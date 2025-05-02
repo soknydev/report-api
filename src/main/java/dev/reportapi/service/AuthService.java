@@ -1,10 +1,10 @@
 package dev.reportapi.service;
 
 
-import dev.reportapi.dto.AuthResponse;
-import dev.reportapi.dto.LoginRequest;
-import dev.reportapi.dto.RefreshTokenRequest;
-import dev.reportapi.dto.RegisterRequest;
+import dev.reportapi.dto.auth.AuthResponse;
+import dev.reportapi.dto.auth.LoginRequest;
+import dev.reportapi.dto.auth.RefreshTokenRequest;
+import dev.reportapi.dto.auth.RegisterRequest;
 
 public interface AuthService {
 

@@ -1,4 +1,4 @@
-package dev.reportapi.dto;
+package dev.reportapi.dto.auth;
 
 import jakarta.validation.constraints.NotBlank;
 
